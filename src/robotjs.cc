@@ -62,8 +62,8 @@ NAN_METHOD(dragMouse)
 	}
 
 	v8::Local<v8::Context> context = info.GetIsolate()->GetCurrentContext();
-	const size_t x = info[0]->Int32Value(context);
-	const size_t y = info[1]->Int32Value(context);
+	const int32_t x = info[0]->Int32Value(context);
+	const int32_t y = info[1]->Int32Value(context);
 	MMMouseButton button = LEFT_BUTTON;
 
 	if (info.Length() == 3)
