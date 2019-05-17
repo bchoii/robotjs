@@ -15,6 +15,7 @@
 #endif
 
 using namespace v8;
+using ::v8::Local;
 
 //Global delays.
 int mouseDelay = 10;
@@ -60,7 +61,7 @@ NAN_METHOD(dragMouse)
 		return Nan::ThrowError("Invalid number of arguments.");
 	}
 
-	const context = info.GetIsolate()->GetCurrentContext();
+	Local<Context> context = info.GetIsolate()->GetCurrentContext();
 	const size_t x = info[0]->Int32Value(context);
 	const size_t y = info[1]->Int32Value(context);
 	MMMouseButton button = LEFT_BUTTON;
