@@ -84,7 +84,7 @@ NAN_METHOD(dragMouse)
 	}
 
 	MMPoint point;
-	point = MMPointMake(x, y);
+	point = MMPointMake(static_cast<size_t>(x), static_cast<size_t>(y));
 	dragMouse(point, button);
 	microsleep(mouseDelay);
 
