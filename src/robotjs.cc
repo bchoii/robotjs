@@ -13,6 +13,7 @@
 #if defined(USE_X11)
 	#include "xdisplay.h"
 #endif
+#include "types.h"
 
 using namespace v8;
 using ::v8::Local;
