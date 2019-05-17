@@ -13,7 +13,6 @@
 #if defined(USE_X11)
 	#include "xdisplay.h"
 #endif
-#include "types.h"
 
 using namespace v8;
 using ::v8::Local;
@@ -84,7 +83,7 @@ NAN_METHOD(dragMouse)
 	}
 
 	MMPoint point;
-	point = MMPointMake(static_cast<size_t>(x), static_cast<size_t>(y));
+	point = MMPointMake(x, y);
 	dragMouse(point, button);
 	microsleep(mouseDelay);
 
