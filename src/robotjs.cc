@@ -141,7 +141,7 @@ NAN_METHOD(mouseClick)
 
 	if (info.Length() > 0)
 	{
-		v8::String::Utf8Value bstr(info[0]->ToString(Nan::GetCurrentContext()));
+		v8::String::Utf8Value bstr(info[0]->ToString());
 		const char * const b = *bstr;
 
 		switch (CheckMouseButton(b, &button))
