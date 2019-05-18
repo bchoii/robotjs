@@ -141,8 +141,8 @@ NAN_METHOD(mouseClick)
 
 	if (info.Length() > 0)
 	{
-		v8::Local<v8::String> str = info[0]->ToString(Nan::GetCurrentContext()).FromMaybe(v8::Local<v8::String>());
-		v8::String::Utf8Value bstr(Nan::GetCurrentContext()->GetIsolate(), str);
+		v8::Local<v8::String> str = info[0]->ToString(Isolate::GetCurrent()->GetCurrentContext()).FromMaybe(v8::Local<v8::String>());
+		v8::String::Utf8Value bstr(Isolate::GetCurrent(), str);
 		const char * const b = *bstr;
 
 		switch (CheckMouseButton(b, &button))
@@ -458,8 +458,8 @@ NAN_METHOD(keyTap)
 
 	char *k;
 
-	v8::Local<v8::String> str = info[0]->ToString(Nan::GetCurrentContext()).FromMaybe(v8::Local<v8::String>());
-	v8::String::Utf8Value kstr(Nan::GetCurrentContext()->GetIsolate(), str);
+	v8::Local<v8::String> str = info[0]->ToString(Isolate::GetCurrent()->GetCurrentContext()).FromMaybe(v8::Local<v8::String>());
+	v8::String::Utf8Value kstr(Isolate::GetCurrent(), str);
 	k = *kstr;
 
 	switch (info.Length())
