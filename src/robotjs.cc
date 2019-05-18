@@ -457,7 +457,8 @@ NAN_METHOD(keyTap)
 
 	char *k;
 
-	v8::String::Utf8Value kstr(info[0]->ToString());
+	v8::Local<v8::String> str = info[0]->ToString(Nan::GetCurrentContext()).FromMaybe(v8::Local<v8::String>());
+	v8::String::Utf8Value kstr(Nan::GetCurrentContext()->GetIsolate(), str);
 	k = *kstr;
 
 	switch (info.Length())
