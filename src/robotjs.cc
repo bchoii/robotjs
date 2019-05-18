@@ -141,7 +141,7 @@ NAN_METHOD(mouseClick)
 
 	if (info.Length() > 0)
 	{
-		v8::String::Utf8Value bstr(info[0]->ToString(Nan::GetCurrentContext()).FromMaybe(v8::Local<v8::String>()));
+		v8::String::Utf8Value bstr(info[0]->ToString(Nan::GetCurrentContext()));
 		const char * const b = *bstr;
 
 		switch (CheckMouseButton(b, &button))
@@ -601,7 +601,7 @@ NAN_METHOD(setKeyboardDelay)
 		return Nan::ThrowError("Invalid number of arguments.");
 	}
 
-	keyboardDelay = info[0]->Int32Value(Nan::GetCurrentContext()).FromJust();
+	keyboardDelay = info[0]->Int32Value();
 
 	info.GetReturnValue().Set(Nan::New(1));
 }
@@ -637,8 +637,8 @@ NAN_METHOD(getPixelColor)
 	MMBitmapRef bitmap;
 	MMRGBHex color;
 
-	size_t x = info[0]->Int32Value(Nan::GetCurrentContext()).FromJust();
-	size_t y = info[1]->Int32Value(Nan::GetCurrentContext()).FromJust();
+	size_t x = info[0]->Int32Value();
+	size_t y = info[1]->Int32Value();
 
 	if (!pointVisibleOnMainDisplay(MMPointMake(x, y)))
 	{
@@ -706,10 +706,10 @@ NAN_METHOD(captureScreen)
 		//TODO: Make sure requested coords are within the screen bounds, or we get a seg fault.
 		// 		An error message is much nicer!
 
-		x = info[0]->Int32Value(Nan::GetCurrentContext()).FromJust();
-		y = info[1]->Int32Value(Nan::GetCurrentContext()).FromJust();
-		w = info[2]->Int32Value(Nan::GetCurrentContext()).FromJust();
-		h = info[3]->Int32Value(Nan::GetCurrentContext()).FromJust();
+		x = info[0]->Int32Value();
+		y = info[1]->Int32Value();
+		w = info[2]->Int32Value();
+		h = info[3]->Int32Value();
 	}
 	else
 	{
