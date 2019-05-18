@@ -237,7 +237,7 @@ NAN_METHOD(setMouseDelay)
 		return Nan::ThrowError("Invalid number of arguments.");
 	}
 
-	mouseDelay = info[0]->Int32Value();
+	mouseDelay = info[0]->Int32Value(Nan::GetCurrentContext()).FromJust();
 
 	info.GetReturnValue().Set(Nan::New(1));
 }
@@ -249,8 +249,8 @@ NAN_METHOD(scrollMouse)
     	return Nan::ThrowError("Invalid number of arguments.");
 	}
 
-	int x = info[0]->Int32Value();
-	int y = info[1]->Int32Value();
+	int x = info[0]->Int32Value(Nan::GetCurrentContext()).FromJust();
+	int y = info[1]->Int32Value(Nan::GetCurrentContext()).FromJust();
 
 	scrollMouse(x, y);
 	microsleep(mouseDelay);
@@ -587,7 +587,7 @@ NAN_METHOD(typeStringDelayed)
 
 	str = *string;
 
-	size_t cpm = info[1]->Int32Value();
+	size_t cpm = info[1]->Int32Value(Nan::GetCurrentContext()).FromJust();
 
 	typeStringDelayed(str, cpm);
 
@@ -601,7 +601,7 @@ NAN_METHOD(setKeyboardDelay)
 		return Nan::ThrowError("Invalid number of arguments.");
 	}
 
-	keyboardDelay = info[0]->Int32Value();
+	keyboardDelay = info[0]->Int32Value(Nan::GetCurrentContext()).FromJust();
 
 	info.GetReturnValue().Set(Nan::New(1));
 }
@@ -637,8 +637,8 @@ NAN_METHOD(getPixelColor)
 	MMBitmapRef bitmap;
 	MMRGBHex color;
 
-	size_t x = info[0]->Int32Value();
-	size_t y = info[1]->Int32Value();
+	size_t x = info[0]->Int32Value(Nan::GetCurrentContext()).FromJust();
+	size_t y = info[1]->Int32Value(Nan::GetCurrentContext()).FromJust();
 
 	if (!pointVisibleOnMainDisplay(MMPointMake(x, y)))
 	{
@@ -706,10 +706,10 @@ NAN_METHOD(captureScreen)
 		//TODO: Make sure requested coords are within the screen bounds, or we get a seg fault.
 		// 		An error message is much nicer!
 
-		x = info[0]->Int32Value();
-		y = info[1]->Int32Value();
-		w = info[2]->Int32Value();
-		h = info[3]->Int32Value();
+		x = info[0]->Int32Value(Nan::GetCurrentContext()).FromJust();
+		y = info[1]->Int32Value(Nan::GetCurrentContext()).FromJust();
+		w = info[2]->Int32Value(Nan::GetCurrentContext()).FromJust();
+		h = info[3]->Int32Value(Nan::GetCurrentContext()).FromJust();
 	}
 	else
 	{
