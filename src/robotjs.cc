@@ -61,9 +61,8 @@ NAN_METHOD(dragMouse)
 		return Nan::ThrowError("Invalid number of arguments.");
 	}
 
-	v8::Local<v8::Context> context = info.GetIsolate()->GetCurrentContext();
-	const size_t x = info[0]->IntegerValue(context);
-	const size_t y = info[1]->IntegerValue(context);
+	const size_t x = info[0]->Int32Value(Nan::GetCurrentContext()).FromJust();
+	const size_t y = info[1]->Int32Value(Nan::GetCurrentContext()).FromJust();
 	MMMouseButton button = LEFT_BUTTON;
 
 	if (info.Length() == 3)
@@ -96,9 +95,8 @@ NAN_METHOD(moveMouse)
 	{
 		return Nan::ThrowError("Invalid number of arguments.");
 	}
-	v8::Local<v8::Context> context = info.GetIsolate()->GetCurrentContext();
-	size_t x = info[0]->Int32Value(context);
-	size_t y = info[1]->Int32Value(context);
+	size_t x = info[0]->Int32Value(Nan::GetCurrentContext()).FromJust();
+	size_t y = info[1]->Int32Value(Nan::GetCurrentContext()).FromJust();
 
 	MMPoint point;
 	point = MMPointMake(x, y);
