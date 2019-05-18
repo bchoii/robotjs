@@ -418,8 +418,8 @@ int CheckKeyFlags(char* f, MMKeyFlags* flags)
 
 int GetFlagsFromString(v8::Local<v8::Value> value, MMKeyFlags* flags)
 {
-	v8::String::Utf8Value fstr(value->ToString(Nan::GetCurrentContext()));
-	return CheckKeyFlags(*fstr, flags);
+	// v8::String::Utf8Value fstr(value->ToString(Nan::GetCurrentContext()));
+	return CheckKeyFlags(value->ToString(Nan::GetCurrentContext()), flags);
 }
 
 int GetFlagsFromValue(v8::Local<v8::Value> value, MMKeyFlags* flags)
