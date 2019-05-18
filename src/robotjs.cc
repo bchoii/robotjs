@@ -112,8 +112,8 @@ NAN_METHOD(moveMouseSmooth)
 	{
 		return Nan::ThrowError("Invalid number of arguments.");
 	}
-	size_t x = info[0]->Int32Value();
-	size_t y = info[1]->Int32Value();
+	size_t x = info[0]->Int32Value(Nan::GetCurrentContext()).FromJust();
+	size_t y = info[1]->Int32Value(Nan::GetCurrentContext()).FromJust();
 
 	MMPoint point;
 	point = MMPointMake(x, y);
