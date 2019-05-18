@@ -421,7 +421,7 @@ int GetFlagsFromString(v8::Local<v8::Value> value, MMKeyFlags* flags)
 {
 	v8::Local<v8::String> str = value->ToString(Isolate::GetCurrent()->GetCurrentContext()).FromMaybe(Local<String>());
 	// v8::Local<v8::String> str = value->ToString(Nan::GetCurrentContext()).FromMaybe(v8::Local<v8::String>());
-	v8::String::Utf8Value fstr(Nan::GetCurrentContext()->GetIsolate(), str);
+	v8::String::Utf8Value fstr(Isolate::GetCurrent(), str);
 	return CheckKeyFlags(*fstr, flags);
 }
 
