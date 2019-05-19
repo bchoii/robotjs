@@ -141,7 +141,7 @@ NAN_METHOD(mouseClick)
 
 	if (info.Length() > 0)
 	{
-		v8::Local<v8::String> str = info[0]->ToString(Nan::GetCurrentContext()).FromMaybe(v8::Local<v8::String>());
+		v8::Local<v8::String> str = info[0]->ToString(v8::Isolate::GetCurrent());
 		v8::String::Utf8Value bstr(Isolate::GetCurrent(), str);
 		const char *const b = *bstr;
 
@@ -158,7 +158,8 @@ NAN_METHOD(mouseClick)
 
 	if (info.Length() == 2)
 	{
-		doubleC = info[1]->BooleanValue(Isolate::GetCurrent());
+		// doubleC = info[1]->BooleanValue(Isolate::GetCurrent());
+		doubleC = Nan::To<bool>(info[1]).FromJust();
 	}
 	else if (info.Length() > 2)
 	{
@@ -421,8 +422,7 @@ int CheckKeyFlags(char *f, MMKeyFlags *flags)
 
 int GetFlagsFromString(v8::Local<v8::Value> value, MMKeyFlags *flags)
 {
-	v8::Local<v8::String> str = value->ToString(Nan::GetCurrentContext()).FromMaybe(Local<String>());
-	// v8::Local<v8::String> str = value->ToString(Nan::GetCurrentContext()).FromMaybe(v8::Local<v8::String>());
+	v8::Local<v8::String> str = value->ToString(v8::Isolate::GetCurrent());
 	v8::String::Utf8Value fstr(Isolate::GetCurrent(), str);
 	return CheckKeyFlags(*fstr, flags);
 }
@@ -463,7 +463,7 @@ NAN_METHOD(keyTap)
 
 	char *k;
 
-	v8::Local<v8::String> str = info[0]->ToString(Nan::GetCurrentContext()).FromMaybe(v8::Local<v8::String>());
+	v8::Local<v8::String> str = info[0]->ToString(v8::Isolate::GetCurrent());
 	v8::String::Utf8Value kstr(Isolate::GetCurrent(), str);
 	k = *kstr;
 
