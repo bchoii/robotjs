@@ -421,8 +421,9 @@ int CheckKeyFlags(char *f, MMKeyFlags *flags)
 
 int GetFlagsFromString(v8::Local<v8::Value> value, MMKeyFlags *flags)
 {
-	v8::Local<v8::String> str = value->ToString(Nan::GetCurrentContext()).FromMaybe(v8::Local<v8::String>());
-	v8::String::Utf8Value fstr(Isolate::GetCurrent(), str);
+	v8::String::Utf8Value fstr(Isolate::GetCurrent(), Nan::To<v8::String>(value).ToLocalChecked());
+	// v8::Local<v8::String> str = value->ToString(Nan::GetCurrentContext()).FromMaybe(v8::Local<v8::String>());
+	// v8::String::Utf8Value fstr(Isolate::GetCurrent(), str);
 	return CheckKeyFlags(*fstr, flags);
 }
 
@@ -462,8 +463,9 @@ NAN_METHOD(keyTap)
 
 	char *k;
 
-	v8::Local<v8::String> str = info[0]->ToString(Nan::GetCurrentContext()).FromMaybe(v8::Local<v8::String>());
-	v8::String::Utf8Value kstr(Isolate::GetCurrent(), str);
+	v8::String::Utf8Value kstr(Isolate::GetCurrent(), Nan::To<v8::String>(info[0]).ToLocalChecked());
+	// v8::Local<v8::String> str = info[0]->ToString(Nan::GetCurrentContext()).FromMaybe(v8::Local<v8::String>());
+	// v8::String::Utf8Value kstr(Isolate::GetCurrent(), str);
 	k = *kstr;
 
 	switch (info.Length())
