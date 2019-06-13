@@ -33,7 +33,7 @@ Install RobotJS using npm:
 
 ```
 npm install robotjs
-npm install bchoii/robotjs#master
+npm install bchoii/robotjs
 ```
 
 It's that easy! npm will download one of the prebuilt [binaries](https://github.com/octalmage/robotjs/releases/latest) for your OS.
